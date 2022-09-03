@@ -34,12 +34,12 @@ class Conta:
 		*OBS: Note também que os atributos devem ter exatamente o nome especificado, e alguns
 		deles são iniciados com valores fixos (não são passados por parâmetro no construtor).
 		"""
-		self._Conta__titular = titular
-		self._Conta__agencia = agencia
-		self._Conta__numero = numero
-		self._Conta__saldo = saldo_inicial
-		self._Conta__ativa = False
-		self._Conta__operacoes = [("saldo inicial",saldo_inicial)]
+		self.__titular = titular
+		self.__agencia = agencia
+		self.__numero = numero
+		self.__saldo = saldo_inicial
+		self.__ativa = False
+		self.__operacoes = [("saldo inicial",saldo_inicial)]
 
 
 	@property
@@ -47,7 +47,7 @@ class Conta:
 		"""
 		Implemente a property titular: retorna o valor do atributo privado titular;
 		"""
-		return self._Conta__titular
+		return self.__titular
 
 
 	@property
@@ -55,7 +55,7 @@ class Conta:
 		"""
 		Implemente a property agencia: retorna o valor do atributo privado agencia;
 		"""
-		return self._Conta__agencia
+		return self.__agencia
 	
 
 	@property
@@ -63,7 +63,7 @@ class Conta:
 		"""
 		Implemente a property numero: retorna o valor do atributo privado numero;
 		"""
-		return self._Conta__numero
+		return self.__numero
 	
 
 	@property
@@ -71,7 +71,7 @@ class Conta:
 		"""
 		Implemente a property saldo: retorna o valor do atributo privado saldo;
 		"""
-		return self._Conta__saldo
+		return self.__saldo
 	
 
 	@property
@@ -79,7 +79,7 @@ class Conta:
 		"""
 		Implemente a property ativa: retorna o valor do atributo privado ativa;
 		"""
-		return self._Conta__ativa
+		return self.__ativa
 	
 
 	@ativa.setter
@@ -97,7 +97,7 @@ class Conta:
 		o tipo booleano.
 		"""
 		if isinstance(situacao, bool):
-			self._Conta__ativa = situacao
+			self.__ativa = situacao
 	
 
 	def depositar(self, valor):
@@ -110,9 +110,9 @@ class Conta:
 		a conta está ativa e o valor do depósito deve ser maior que zero. Você deve
 		implementar essas verificações com uma estrutura condicional.
 		"""
-		if valor > 0 and self._Conta__ativa:
-			self._Conta__operacoes.append(("deposito",valor))
-			self._Conta__saldo += valor
+		if valor > 0 and self.__ativa:
+			self.__operacoes.append(("deposito",valor))
+			self.__saldo += valor
 
 
 	def sacar(self, valor):
@@ -126,9 +126,9 @@ class Conta:
 		saque não pode ser maior que o saldo atual da conta. Você deve implementar
 		essas verificações com uma estrutura condicional.
 		"""
-		if self._Conta__saldo >= valor > 0 and self._Conta__ativa:
-			self._Conta__operacoes.append(("saque",valor))
-			self._Conta__saldo -= valor
+		if self.__saldo >= valor > 0 and self.__ativa:
+			self.__operacoes.append(("saque",valor))
+			self.__saldo -= valor
 
 
 	def transferir(self, conta_destino, valor):
@@ -147,9 +147,9 @@ class Conta:
 		não pode ser maior que o saldo atual da conta de origem. Você deve implementar
 		essas verificações.
 		"""
-		if self._Conta__ativa and isinstance(conta_destino.ativa, bool) and conta_destino.ativa and self._Conta__saldo  >= valor > 0:
-			self._Conta__saldo -= valor
-			self._Conta__operacoes.append(('transferencia', valor))
+		if self.__ativa and isinstance(conta_destino.ativa, bool) and conta_destino.ativa and self.__saldo  >= valor > 0:
+			self.__saldo -= valor
+			self.__operacoes.append(('transferencia', valor))
 			conta_destino.depositar(valor)
 	
 
@@ -164,6 +164,6 @@ class Conta:
 		Você deve seguir exatamente esse padrão, utilizando letras minúsculas e sem
 		acentos.
 		"""
-		return self._Conta__operacoes
+		return self.__operacoes
 
 
